@@ -1,0 +1,18 @@
+
+- name: apache2 virtualhost on port {{ http_port }}
+  lineinfile: dest=/etc/apache2/sites-available/000-default.conf regexp="^<VirtualHost \*:" line="<VirtualHost *:{{ http_port }}>"
+  notify:
+    - apache-restart
+
+- name: Create virtual host file
+  template:
+    src=templates/virtualhost.conf
+    dest=/etc/apache2/sites-available/{{ domain }}.conf
+
+- name: a2ensite {{ domain }}
+  command: a2ensite {{ domain }}
+  args:
+    creates: /etc/apache2/sites-enabled/{{ domain }}.conf
+  notify:
+    - apache-restart
+

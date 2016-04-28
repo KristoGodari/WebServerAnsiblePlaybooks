@@ -1,0 +1,17 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  sudo: yes
+
+  vars_files:
+    - vars/main.yml
+
+  tasks:
+    - include: tasks/install_apache.yml
+
+    - include: tasks/configure_ports.yml
+
+    - include: tasks/configure_virtual_hosts.yml
+
+  handlers:
+    - include: handlers/handlers.yml

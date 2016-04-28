@@ -1,0 +1,6 @@
+
+#Apache listen port
+http_port: 9090
+
+# Vhost domain
+domain: godariguard.com
